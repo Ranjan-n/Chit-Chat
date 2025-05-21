@@ -11,10 +11,10 @@
     "zod": "^3.25.1"
   },
   "exports": {
-    "./types": "./src/types.js"
+    "./types": "./src/types.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
