@@ -1,6 +1,11 @@
 import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { signinSchema, signupSchema } from "@repo/common/types";
+import { userMiddleware } from "./middlewares";
+import {
+  createRoomSchema,
+  signinSchema,
+  signupSchema,
+} from "@repo/common/types";
 import { prismaClient } from "@repo/db/client";
 import { JWT_SECRET, SALT_ROUNDS } from "@repo/common-backend/config";
 import bcrypt from "bcryptjs";
@@ -15,6 +20,7 @@ app.post("/signup", async (req: Request, res: Response) => {
 
     if (!result.success) {
       res.status(400).json({
+        message: "Invalid input",
         error: result.error.format(),
       });
       return;
@@ -33,7 +39,8 @@ app.post("/signup", async (req: Request, res: Response) => {
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(result.data.password, SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
+    const hashedPassword = await bcrypt.hash(result.data.password, salt);
 
     const user = await prismaClient.user.create({
       data: {
@@ -113,6 +120,43 @@ app.post("/signin", async (req: Request, res: Response) => {
     });
   }
 });
+
+// @ts-ignore
+app.post(
+  "/create-room",
+  userMiddleware,
+  async (req: Request, res: Response) => {
+    try {
+      const result = createRoomSchema.safeParse(req.body);
+
+      if (!result.success) {
+        res.status(400).json({
+          error: result.error.format(),
+        });
+        return;
+      }
+
+      // @ts-ignore
+      const userId = req.userId;
+
+      const room = await prismaClient.room.create({
+        data: {
+          name: result.data.name,
+          adminId: userId,
+        },
+      });
+
+      res.status(200).json({
+        roomId: room.id,
+      });
+    } catch (error) {
+      console.error("Error creating room:", error);
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  }
+);
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
