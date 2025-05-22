@@ -158,6 +158,47 @@ app.post(
   }
 );
 
+app.get("/chats/:room", userMiddleware, async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    const userId = req.userId;
+    const name = req.params.room;
+
+    const room = await prismaClient.room.findUnique({
+      where: {
+        name: name,
+      },
+    });
+
+    if (!room) {
+      res.status(404).json({
+        message: "Room not found",
+      });
+      return;
+    }
+
+    const chats = await prismaClient.chat.findMany({
+      where: {
+        roomId: room.id,
+      },
+      orderBy: {
+        id: "desc",
+      },
+      take: 10,
+    });
+
+    res.status(200).json({
+      chats: chats.reverse(),
+      roomId: room.id,
+    });
+  } catch (error) {
+    console.error("Error fetching chats:", error);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
 });
