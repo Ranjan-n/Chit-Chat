@@ -93,9 +93,6 @@ importers:
       '@repo/common-backend':
         specifier: workspace:*
         version: link:../../packages/common-backend
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
