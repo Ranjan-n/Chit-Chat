@@ -9,10 +9,13 @@ import {
 import { prismaClient } from "@repo/db/client";
 import { JWT_SECRET, SALT_ROUNDS } from "@repo/common-backend/config";
 import bcrypt from "bcryptjs";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.post("/signup", async (req: Request, res: Response) => {
   try {
