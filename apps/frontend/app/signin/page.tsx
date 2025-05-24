@@ -8,6 +8,12 @@ import { BACKEND_URL } from "../config";
 
 export default function SignIn() {
   const router = useRouter();
+
+  if (localStorage.getItem("token")) {
+    router.push("/home");
+    return null;
+  }
+
   const [error, setError] = useState<string | null>(null);
   const [Loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<SignInInput>({
@@ -91,7 +97,7 @@ export default function SignIn() {
             Don't have an account?{" "}
             <button
               type="button"
-              onClick={() => router.push("/signin")}
+              onClick={() => router.push("/signup")}
               className="text-blue-500 hover:text-blue-400 cursor-pointer"
             >
               Create Account

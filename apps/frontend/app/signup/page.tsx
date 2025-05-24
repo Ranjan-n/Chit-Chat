@@ -8,6 +8,12 @@ import { BACKEND_URL } from "../config";
 
 export default function SignUp() {
   const router = useRouter();
+
+  if (localStorage.getItem("token")) {
+    router.push("/home");
+    return null;
+  }
+
   const [error, setError] = useState<string | null>(null);
   const [Loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<SignUpInput>({
