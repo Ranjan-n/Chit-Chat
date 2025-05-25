@@ -62,6 +62,7 @@ app.post("/signup", async (req: Request, res: Response) => {
 
     res.status(200).json({
       token,
+      userId: user.id,
     });
   } catch (error) {
     console.error("Error signing up user:", error);
@@ -115,6 +116,7 @@ app.post("/signin", async (req: Request, res: Response) => {
     );
     res.status(200).json({
       token,
+      userId: user.id,
     });
   } catch (error) {
     console.error("Error signing in user:", error);

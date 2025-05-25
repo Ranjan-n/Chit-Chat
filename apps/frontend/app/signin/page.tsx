@@ -36,6 +36,7 @@ export default function SignIn() {
 
       const token = res.data.token;
       localStorage.setItem("token", token);
+      localStorage.setItem("userId", res.data.userId);
       setLoading(false);
       router.push("/home");
     } catch (err) {
