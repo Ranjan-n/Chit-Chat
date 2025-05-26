@@ -3,16 +3,17 @@
 import { SignInInput } from "@repo/common/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
 
 export default function SignIn() {
   const router = useRouter();
 
-  if (localStorage.getItem("token")) {
-    router.push("/home");
-    return null;
-  }
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("token")) {
+      router.push("/home");
+    }
+  }, [router]);
 
   const [error, setError] = useState<string | null>(null);
   const [Loading, setLoading] = useState(false);
