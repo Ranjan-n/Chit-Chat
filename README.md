@@ -1,84 +1,102 @@
-# Turborepo starter
+# Chit-Chat
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, scalable real-time chat application built with a microservices architecture using Turborepo.
 
-## Using this example
+## 🚀 Overview
 
-Run the following command:
+Chit-Chat is a feature-rich chat application that demonstrates the power of modern web technologies and microservices architecture. Built using Turborepo for monorepo management, it provides a seamless real-time communication experience with features like instant messaging, real-time updates, and efficient message queuing.
 
-```sh
-npx create-turbo@latest
+## 🏗️ Architecture
+
+The project is structured as a monorepo with multiple apps and shared packages:
+
+### Applications (`/apps`)
+
+- `frontend`: The main web client application built with NextJS and TailwindCSS
+- `backend`: REST API server built with ExpressJS
+- `websocket`: WebSocket server for real-time communication
+- `worker`: Background job processor using BullMQ
+
+### Shared Packages (`/packages`)
+
+- `db`: Database models and migrations
+- `common`: Shared utilities and types
+- `common-backend`: Shared backend utilities
+- `typescript-config`: Shared TypeScript configuration
+
+## 🛠️ Tech Stack
+
+- **Frontend**: 
+  - NextJS for server-side rendering and routing
+  - TypeScript for type safety
+  - TailwindCSS for modern, utility-first styling
+  - Zustand for efficient state management
+- **Backend**: 
+  - NodeJS runtime environment
+  - ExpressJS for REST API
+  - TypeScript for enhanced development experience
+- **Real-time Communication**: 
+  - WebSocket for bidirectional communication
+- **Message Queue**:
+  - Redis for in-memory data storage
+  - BullMQ for reliable job queuing and processing
+- **Development Tools**:
+  - Turborepo for monorepo management
+  - PNPM for fast, disk-space efficient package management
+  - TypeScript for static type checking
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- PNPM >= 9.0.0
+- Redis server (for message queuing)
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Ranjan-n/Chit-Chat
+cd Chit-Chat
 ```
 
-## What's inside?
+2. Install dependencies:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+pnpm install
 ```
 
-### Develop
+### Development
 
-To develop all apps and packages, run the following command:
+Run all applications in development mode:
 
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+pnpm run dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Building
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+Build all applications and packages:
 
+```bash
+pnpm run build
 ```
-npx turbo link
-```
 
-## Useful Links
+## 🤝 Contributing
 
-Learn more about the power of Turborepo:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## 🔗 Useful Links
+
+- [Turborepo Documentation](https://turborepo.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [Zustand Documentation](https://github.com/pmndrs/zustand)
+- [BullMQ Documentation](https://docs.bullmq.io/)
