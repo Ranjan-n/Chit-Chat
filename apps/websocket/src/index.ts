@@ -62,6 +62,7 @@ wss.on("connection", (ws, req) => {
                 type: "MESSAGE",
                 roomId: msg.roomId,
                 message: msg.message,
+                userId: user.userId,
               })
             );
           }

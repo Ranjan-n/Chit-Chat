@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { Message, useChatStore } from '../store/useChatStore';
-import { WEBSOCKET_URL } from '../app/config';
+import { useEffect, useRef } from "react";
+import { Message, useChatStore } from "../store/useChatStore";
+import { WEBSOCKET_URL } from "../app/config";
 
 interface UseSocketProps {
   roomId: string | undefined;
@@ -50,15 +50,6 @@ export const useSocket = ({ roomId }: UseSocketProps) => {
     if (!ws.current || ws.current.readyState !== 1) return;
 
     const userId = localStorage.getItem("userId");
-    const newMessage: Message = {
-      id: Date.now(),
-      message: message,
-      userId: userId || "",
-      roomId: roomId || "",
-      isSelf: true,
-    };
-
-    setMessages([...messages, newMessage]);
 
     ws.current.send(
       JSON.stringify({
@@ -82,4 +73,4 @@ export const useSocket = ({ roomId }: UseSocketProps) => {
     disconnect,
     ws: ws.current,
   };
-}; 
+};
